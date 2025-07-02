@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
-    <RootNamespace>Log4Mongo.net</RootNamespace>
-    <AssemblyName>Log4Mongo.net</AssemblyName>
-    <PackageId>Log4Mongo.net</PackageId>
-    <PackageTags>Log4Mongo;Log4Mongo.net;</PackageTags>
+    <RootNamespace>Log4Mongo</RootNamespace>
+    <AssemblyName>Log4Mongo</AssemblyName>
+    <PackageId>Log4Mongo</PackageId>
+    <PackageTags>Log4Mongo;Log4Mongo;</PackageTags>
     <MinClientVersion>1.0.0</MinClientVersion>
     <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
