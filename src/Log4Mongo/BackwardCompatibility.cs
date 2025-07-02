@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Bson;
 using log4net.Core;
 using log4net.Util;
 
@@ -25,7 +21,7 @@ namespace Log4Mongo
 				{"message", loggingEvent.RenderedMessage}, 
 				{"loggerName", loggingEvent.LoggerName}, 
 				{"domain", loggingEvent.Domain}, 
-				{"machineName", Environment.MachineName}
+				{"machineName", System.Environment.MachineName}
 			};
 
 			// location information, if available
@@ -48,7 +44,7 @@ namespace Log4Mongo
 			if(compositeProperties != null && compositeProperties.Count > 0)
 			{
 				var properties = new BsonDocument();
-				foreach(DictionaryEntry entry in compositeProperties)
+				foreach(var entry in compositeProperties)
 				{
 					properties.Add(entry.Key.ToString(), entry.Value.ToString());
 				}
@@ -59,7 +55,7 @@ namespace Log4Mongo
 			return toReturn;
 		}
 
-		private static BsonDocument BuildExceptionBsonDocument(Exception ex)
+		private static BsonDocument BuildExceptionBsonDocument(System.Exception ex)
 		{
 			var toReturn = new BsonDocument {
 				{"message", ex.Message}, 

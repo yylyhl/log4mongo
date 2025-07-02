@@ -16,67 +16,49 @@ Appender configuration sample
 -----------------------------
 
 	<appender name="MongoDBAppender" type="Log4Mongo.MongoDBAppender, Log4Mongo">
-		<!-- 
-		MongoDB database connection in the format:
-		mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-		See http://www.mongodb.org/display/DOCS/Connections for connectionstring options 
-		If no database specified, default to "log4net"
-		-->
-		<connectionString value="mongodb://localhost" />
-		<!-- 
-		Name of connectionString defined in web/app.config connectionStrings group, the format is the same as connectionString value.
-		Optional, If not provided will use connectionString value
-		-->
-		<connectionStringName value="mongo-log4net" />
-		<!-- 
-		The Friendly Name of the certificate. This value will be used if SSL is set to true
-		The default StoreLocation is LocalMachine and StoreName is My
-		-->	
-		<certificateFriendlyName value="Certificate Friendly Name"/>	
-		<!-- 
-		If set, a TTL (Time To Live) index will be created on the Timestamp field.  
-		Records older than this value will be deleted.
-		-->	
-		<expireAfterSeconds value="3600" />
-		<!-- 
-		Name of the collection in database
-		Optional, Defaults to "logs"
-		-->
-		<collectionName value="logs" />
-
-		<!--
-		Maximum size of newly created collection. Optional, Defaults to creating uncapped collections
-		-->
-		<newCollectionMaxSize value='65536' />
-		<newCollectionMaxDocs value='5000' />
-		
-		<field>
-			<!-- Note: this needs to be "timestamp" and NOT "Timestamp"  for the TTL index to work -->
-			<name value="timestamp" />
-			<layout type="log4net.Layout.RawTimeStampLayout" />
-		</field>
-		<field>
-			<name value="level" />
-			<layout type="log4net.Layout.PatternLayout" value="%level" />
-		</field>
-		<field>
-			<name value="thread" />
-			<layout type="log4net.Layout.PatternLayout" value="%thread" />
-		</field>
-		<field>
-			<name value="logger" />
-			<layout type="log4net.Layout.PatternLayout" value="%logger" />
-		</field>
-		<field>
-			<name value="message" />
-			<layout type="log4net.Layout.PatternLayout" value="%message" />
-		</field>
-		<field>
-			<name value="mycustomproperty" />
-			<layout type="log4net.Layout.RawPropertyLayout">
-				<key value="mycustomproperty" />
-			</layout>
-		</field>
+	  <connectionString value="mongodb://127.0.0.1:27017/ProjectLogs?authSource=admin" />
+	  <CollectionName value="pname%yyyyMMdd"/>
+	  <expireAfterSeconds value="2592000" />
+	  <field>
+		<name value="timestamp" />
+		<layout type="log4net.Layout.RawTimeStampLayout" />
+	  </field>
+	  <field>
+		<name value="logtime" />
+		<layout type="log4net.Layout.PatternLayout" value="%date{yyyy-MM-dd HH:mm:ss.fff}"/>
+	  </field>
+	  <field>
+		<name value="level" />
+		<layout type="log4net.Layout.PatternLayout" value="%level"/>
+	  </field>
+	  <field>
+		<name value="processName" />
+		<layout type="log4net.Layout.PatternLayout" value="%appdomain"/>
+	  </field>
+	  <field>
+		<name value="hostname" />
+		<layout type="log4net.Layout.PatternLayout" value="%property{log4net:HostName}"/>
+	  </field>
+	  <field>
+		<name value="processId" />
+		<layout type="log4net.Layout.PatternLayout" value="%property{ProcessId}"/>
+	  </field>
+	  <field>
+		<name value="thread" />
+		<layout type="log4net.Layout.PatternLayout" value="%thread"/>
+	  </field>
+	  <field>
+		<name value="logger" />
+		<layout type="log4net.Layout.PatternLayout" value="%logger"/>
+	  </field>
+	  <field>
+		<name value="message" />
+		<layout type="log4net.Layout.PatternLayout" value="%message"/>
+	  </field>
+	  <field>
+		<name value="error" />
+		<layout type="log4net.Layout.ExceptionLayout"/>
+	  </field>
 	</appender>
 
 License
